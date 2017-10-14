@@ -1,19 +1,50 @@
 -- Write the following SQL statements in joins.sql
 
 -- Create a query to get all fields from the users table
-SELECT id, username, first_name, last_name, created_at, updated_at
-  FROM users;
+
+-- SELECT id, username, first_name, last_name, created_at, updated_at
+  -- FROM users;
+
 -- Create a query to get all fields from the posts table where the user_id is 100
--- SELECT 
+
+-- SELECT id, title, url, content, created_at, updated_at, user_id
+  -- FROM posts
+  -- WHERE user_id = 100;
+
 -- Create a query to get all posts fields, the user's first name, and the user's last name, from the posts table where the user's id is 200
+
+-- SELECT p.id, p.title, p.url, p.content, p.created_at, p.updated_at, p.user_id, u.first_name, u.last_name
+--   FROM posts p
+--   JOIN users u ON u.id = p.user_id 
+--   WHERE user_id = 200;
 
 -- Create a query to get all posts fields, and the user's username, from the posts table where the user's first name is 'Norene' and the user's last_name is 'Schmitt'
 
+-- SELECT p.id, p.title, p.url, p.content, p.created_at, p.updated_at, p.user_id, u.first_name, u.last_name
+--   FROM posts p
+--   JOIN users u ON u.id = p.user_id 
+--   WHERE u.first_name = 'Norene'
+--   AND u.last_name = 'Schmitt';
+
 -- Create a query to get usernames from the users table where the user has created a post after January 1, 2015
+
+-- SELECT u.username
+--   FROM users u
+--   JOIN posts p ON p.user_id = u.id
+--   WHERE p.created_at > '2015-01-01';
 
 -- Create a query to get the post title, post content, and user's username where the user who created the post joined before January 1, 2015
 
+-- SELECT p.title, p.content, u.username
+--   FROM posts p
+--   JOIN users u ON u.id = p.user_id
+--   WHERE u.created_at < '2015-01-01';
+
 -- Create a query to get the all rows in the comments table, showing post title (aliased as 'Post Title'), and the all the comment's fields
+
+SELECT p.title, c.id, c.body, c.created_at, c.updated_at, c.post_id, c.user_id
+  FROM comments c
+  JOIN posts p ON p.id = c.post_id;
 
 -- Create a query to get the all rows in the comments table, showing post title (aliased as post_title), post url (ailased as post_url), and the comment body (aliased as comment_body) where the post was created before January 1, 2015
 
