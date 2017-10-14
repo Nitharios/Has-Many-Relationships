@@ -42,17 +42,34 @@
 
 -- Create a query to get the all rows in the comments table, showing post title (aliased as 'Post Title'), and the all the comment's fields
 
-SELECT p.title, c.id, c.body, c.created_at, c.updated_at, c.post_id, c.user_id
-  FROM comments c
-  JOIN posts p ON p.id = c.post_id;
+-- SELECT p.title AS "Post Title", c.id, c.body, c.created_at, c.updated_at, c.post_id, c.user_id
+--   FROM comments c
+--   JOIN posts p ON p.id = c.post_id;
 
 -- Create a query to get the all rows in the comments table, showing post title (aliased as post_title), post url (ailased as post_url), and the comment body (aliased as comment_body) where the post was created before January 1, 2015
 
+-- SELECT p.title AS "post_title", p.url AS "post_url", c.body AS "post_url"
+--   FROM posts p
+--   JOIN comments c ON c.post_id = p.id
+--   WHERE p.created_at < '2015-01-01';
+
 -- Create a query to get the all rows in the comments table, showing post title (aliased as post_title), post url (ailased as post_url), and the comment body (aliased as comment_body) where the post was created after January 1, 2015
+
+-- SELECT p.title AS "post_title", p.url AS "post_url", c.body AS "comment_body"
+--   FROM posts p
+--   JOIN comments c ON c.post_id = p.id
+--   WHERE p.created_at > '2015-01-01';
 
 -- Create a query to get the all rows in the comments table, showing post title (aliased as post_title), post url (ailased as post_url), and the comment body (aliased as comment_body) where the comment body contains the word 'USB'
 
+-- SELECT p.title AS "post_title", p.url AS "post_url", c.body AS "comment_body"
+--   FROM comments c
+--   JOIN posts p ON p.id = c.post_id
+--   WHERE c.body LIKE '%USB%';
+
 -- Create a query to get the post title (aliased as post_title), first name of the author of the post, last name of the author of the post, and comment body (aliased to comment_body), where the comment body contains the word 'matrix' ( should have 855 results )
+
+SELECT
 
 -- Create a query to get the first name of the author of the comment, last name of the author of the comment, and comment body (aliased to comment_body), where the comment body contains the word 'SSL' and the post content contains the word 'dolorum' ( should have 102 results )
 
