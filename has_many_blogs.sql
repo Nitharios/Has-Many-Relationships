@@ -27,17 +27,17 @@ CREATE TABLE posts(
   url         varchar(510),
   content     text,
   created_at  timestamptz   NOT NULL    DEFAULT now(),
-  updated_at  timestamptz   NOT NULL    DEFAULT now()
-  user_id     integer       NOT NULL    REFERENCES users(id),
+  updated_at  timestamptz   NOT NULL    DEFAULT now(),
+  user_id     integer       NOT NULL    REFERENCES users(id)
 );
 
 CREATE TABLE comments(
   id          SERIAL        NOT NULL    PRIMARY KEY,
   body        varchar(510),
   created_at  timestamptz   NOT NULL    DEFAULT now(),
-  updated_at  timestamptz   NOT NULL    DEFAULT now()
+  updated_at  timestamptz   NOT NULL    DEFAULT now(),
   post_id     integer       NOT NULL    REFERENCES posts(id),
-  user_id     integer       NOT NULL    REFERENCES users(id),
+  user_id     integer       NOT NULL    REFERENCES users(id)
 );
 
 -- Run the provided scripts/blog_data.sql
