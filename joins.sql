@@ -77,11 +77,18 @@
 
 -- Create a query to get the first name of the author of the comment, last name of the author of the comment, and comment body (aliased to comment_body), where the comment body contains the word 'SSL' and the post content contains the word 'dolorum' ( should have 102 results )
 
-SELECT u.first_name, u.last_name, c.body AS "comment_body"
+-- SELECT u.first_name, u.last_name, c.body AS "comment_body"
+--   FROM comments c
+--   JOIN posts p ON p.id = c.post_id
+--   JOIN users u ON u.id = p.user_id
+--   WHERE p.content LIKE '%dolorum%'
+--   AND c.body LIKE '%SSL%';
+
+-- Create a query to get the first name of the author of the post (aliased to post_author_first_name), last name of the author of the post (aliased to post_author_last_name), the post title (aliased to post_title), username of the author of the comment (aliased to comment_author_username), and comment body (aliased to comment_body), where the comment body contains the word 'SSL' or 'firewall' and the post content contains the word 'nemo' ( should have 218 results )
+
+SELECT u.first_name AS "post_author_first_name", u.last_name AS "post_author_last_name", p.title AS "post_title", u.username AS "comment_author_username", c.body AS "comment_body"
   FROM comments c
   JOIN posts p ON p.id = c.post_id
   JOIN users u ON u.id = p.user_id
-  WHERE p.content LIKE '%dolorum%'
-  AND c.body LIKE '%SSL%';
-
--- Create a query to get the first name of the author of the post (aliased to post_author_first_name), last name of the author of the post (aliased to post_author_last_name), the post title (aliased to post_title), username of the author of the comment (aliased to comment_author_username), and comment body (aliased to comment_body), where the comment body contains the word 'SSL' or 'firewall' and the post content contains the word 'nemo' ( should have 218 results )
+  WHERE p.content LIKE '%nemo%'
+  AND (c.body LIKE '%firewall%' OR c.body LIKE '%SSL%');
