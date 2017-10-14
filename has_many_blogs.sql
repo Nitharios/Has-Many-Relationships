@@ -14,8 +14,8 @@ CREATE TABLE users(
   username    varchar(90)   NOT NULL,
   first_name  varchar(90),
   last_name   varchar(90),
-  created_at  timestamp     NOT NULL    DEFAULT now(),
-  updated_at  timestamp     NOT NULL    DEFAULT now()
+  created_at  timestamptz   NOT NULL    DEFAULT now(),
+  updated_at  timestamptz   NOT NULL    DEFAULT now()
 );
 
 CREATE TABLE posts(
@@ -23,15 +23,15 @@ CREATE TABLE posts(
   title       varchar(180),
   url         varchar(510),
   content     text,
-  created_at  timestamp     NOT NULL    DEFAULT now(),
-  updated_at  timestamp     NOT NULL    DEFAULT now()
+  created_at  timestamptz   NOT NULL    DEFAULT now(),
+  updated_at  timestamptz   NOT NULL    DEFAULT now()
 );
 
 CREATE TABLE comments(
   id          SERIAL        NOT NULL    PRIMARY KEY,
   body        varchar(510),
-  created_at  timestamp     NOT NULL    DEFAULT now(),
-  updated_at  timestamp     NOT NULL    DEFAULT now()
+  created_at  timestamptz   NOT NULL    DEFAULT now(),
+  updated_at  timestamptz   NOT NULL    DEFAULT now()
 );
 
 -- Create the necessary FKs needed to relate the tables according to the relationship table below.
