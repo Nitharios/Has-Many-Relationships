@@ -1,44 +1,41 @@
-\c nniosco;
 DROP DATABASE IF EXISTS has_many_blogs;
-DROP USER IF EXISTS has_many_user;
--- Create a new postgres user named has_many_user
+DROP USER has_many_user;
 CREATE USER has_many_user;
--- Create a new database named has_many_blogs owned by has_many_user
-CREATE DATABASE has_many_blogs 
-  WITH OWNER has_many_user;
--- Before each create table statement, add a drop table if exists statement.
+CREATE DATABASE has_many_blogs OWNER = has_many_user;
 \c has_many_blogs;
--- In has_many_blogs.sql Create the tables (including any PKs, Indexes, and Constraints that you may need) to fulfill the requirements of the has_many_blogs schema below.
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS comments;
 
--- Create the necessary FKs needed to relate the tables according to the relationship table below.
-
-CREATE TABLE users(
-  id          SERIAL        PRIMARY KEY,
-  username    varchar(90)   NOT NULL,
-  first_name  varchar(90),
-  last_name   varchar(90),
-  created_at  timestamptz   NOT NULL    DEFAULT now(),
-  updated_at  timestamptz   NOT NULL    DEFAULT now()
+CREATE TABLE users
+(
+  id serial PRIMARY KEY,
+  username VARCHAR(90) NOT NULL,
+  first_name VARCHAR(90) NULL NULL,
+  last_name VARCHAR(90) NULL NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TABLE posts(
-  id          SERIAL        PRIMARY KEY,
-  title       varchar(180),
-  url         varchar(510),
-  content     text,
-  created_at  timestamptz   NOT NULL    DEFAULT now(),
-  updated_at  timestamptz   NOT NULL    DEFAULT now(),
-  user_id     integer       NOT NULL    REFERENCES users(id)
+CREATE TABLE posts
+(
+  id serial PRIMARY KEY,
+  title VARCHAR(180) NULL NULL,
+  url VARCHAR(510) NULL NULL,
+  content TEXT NULL NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  users_id integer REFERENCES users(id)
 );
 
-CREATE TABLE comments(
-  id          SERIAL        PRIMARY KEY,
-  body        varchar(510),
-  created_at  timestamptz   NOT NULL    DEFAULT now(),
-  updated_at  timestamptz   NOT NULL    DEFAULT now(),
-  post_id     integer       NOT NULL    REFERENCES posts(id),
-  user_id     integer       NOT NULL    REFERENCES users(id)
+CREATE TABLE comments
+(
+  id serial PRIMARY KEY,
+  body VARCHAR(510) NULL NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  users_id integer REFERENCES users(id),
+  posts_id integer REFERENCES posts(id)
 );
 
--- Run the provided scripts/blog_data.sql
 \i scripts/blog_data.sql;
