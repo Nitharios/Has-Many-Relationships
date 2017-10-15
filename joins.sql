@@ -88,8 +88,8 @@
 
 SELECT u.first_name AS "post_author_first_name", u.last_name AS "post_author_last_name", p.title AS "post_title", u.username AS "comment_author_username", c.body AS "comment_body"
   FROM comments c
-  LEFT JOIN posts p ON p.id = c.post_id
-  LEFT JOIN users u ON u.id = c.user_id
+  JOIN posts p ON p.id = c.post_id
+  JOIN users u ON u.id = c.user_id
   WHERE p.content LIKE '%nemo%'
   AND (c.body LIKE '%SSL%' OR c.body LIKE '%firewall%');
 
