@@ -88,7 +88,26 @@
 
 SELECT u.first_name AS "post_author_first_name", u.last_name AS "post_author_last_name", p.title AS "post_title", u.username AS "comment_author_username", c.body AS "comment_body"
   FROM comments c
-  JOIN posts p ON p.id = c.post_id
-  JOIN users u ON u.id = p.user_id
+  LEFT JOIN posts p ON p.id = c.post_id
+  LEFT JOIN users u ON u.id = c.user_id
   WHERE p.content LIKE '%nemo%'
-  AND (c.body LIKE '%firewall%' OR c.body LIKE '%SSL%');
+  AND (c.body LIKE '%SSL%' OR c.body LIKE '%firewall%');
+
+-- Additional Queries
+
+-- If you finish early, perform and record the following SQL statements in joins.sql using these higher level requirements.
+
+-- Count how many comments have been written on posts that have been created after July 14, 2015 ( should have one result, the value of the count should be 27)
+
+-- SELECT COUNT (c.id) AS "total"
+--   FROM posts p
+--   JOIN comments c ON p.id = c.post_id
+--   WHERE p.created_at > '2015-07-14'::TIMESTAMPTZ;
+
+-- Find all users who comment about 'programming' ( should have 336 results)
+
+-- SELECT DISTINCT u.username AS "users"
+--   FROM comments c
+--   -- JOIN posts p ON p.user_id = u.id
+--   JOIN users u ON c.user_id = u.id
+--   WHERE c.body LIKE '%programming%';

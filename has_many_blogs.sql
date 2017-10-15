@@ -13,7 +13,7 @@ CREATE DATABASE has_many_blogs
 -- Create the necessary FKs needed to relate the tables according to the relationship table below.
 
 CREATE TABLE users(
-  id          SERIAL        NOT NULL    PRIMARY KEY,
+  id          SERIAL        PRIMARY KEY,
   username    varchar(90)   NOT NULL,
   first_name  varchar(90),
   last_name   varchar(90),
@@ -22,7 +22,7 @@ CREATE TABLE users(
 );
 
 CREATE TABLE posts(
-  id          SERIAL        NOT NULL    PRIMARY KEY,
+  id          SERIAL        PRIMARY KEY,
   title       varchar(180),
   url         varchar(510),
   content     text,
@@ -32,7 +32,7 @@ CREATE TABLE posts(
 );
 
 CREATE TABLE comments(
-  id          SERIAL        NOT NULL    PRIMARY KEY,
+  id          SERIAL        PRIMARY KEY,
   body        varchar(510),
   created_at  timestamptz   NOT NULL    DEFAULT now(),
   updated_at  timestamptz   NOT NULL    DEFAULT now(),
